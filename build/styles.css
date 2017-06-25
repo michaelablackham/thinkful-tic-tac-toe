@@ -1,0 +1,31 @@
+* {
+  font-family: 'Lato', sans-serif; }
+
+body {
+  background: #101010;
+  padding: 50px 0; }
+
+h1 {
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 100px;
+  letter-spacing: 5px;
+  font-size: 3em; }
+
+.game-container {
+  display: block;
+  width: 600px;
+  margin: auto; }
+  .game-container .row {
+    display: flex;
+    border-top: 10px solid #292929; }
+    .game-container .row:first-of-type {
+      border: 0; }
+    .game-container .row .square {
+      box-sizing: border-box;
+      width: 200px;
+      height: 200px;
+      border-left: 10px solid #292929; }
+      .game-container .row .square:first-of-type {
+        border: 0; }

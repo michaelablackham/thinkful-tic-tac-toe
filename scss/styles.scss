@@ -1,3 +1,44 @@
+* {
+  font-family: 'Lato', sans-serif;
+}
 body {
+  background: #101010;
+  padding: 50px 0;
+}
 
+h1 {
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 100px;
+  letter-spacing: 5px;
+  font-size: 3em;
+}
+
+
+//GAME CONTAINER
+.game-container {
+  display: block;
+  width: 600px;
+  margin: auto;
+
+  .row {
+    display: flex;
+    border-top: 10px solid #292929;
+
+    &:first-of-type {
+      border: 0;
+    }
+
+    .square {
+      box-sizing: border-box;
+      width: 200px;
+      height: 200px;
+      border-left: 10px solid #292929;
+
+      &:first-of-type {
+        border: 0;
+      }
+    }
+  }
 }
