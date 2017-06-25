@@ -1,4 +1,5 @@
 * {
+  color: #fff;
   font-family: 'Lato', sans-serif;
 }
 body {
@@ -9,7 +10,6 @@ body {
 h1 {
   text-align: center;
   text-transform: uppercase;
-  color: #fff;
   margin-bottom: 100px;
   letter-spacing: 5px;
   font-size: 3em;
@@ -32,6 +32,11 @@ h1 {
 
     .square {
       box-sizing: border-box;
+      font-size: 7em;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 200px;
       height: 200px;
       border-left: 10px solid #292929;
