@@ -2,39 +2,78 @@ $(function() {
   'use strict';
 
   var state = {
-    turnX: true,
+    board: [
+      [null, null, null],
+      [null, null, null],
+      [null, null, null]
+    ],
+    turnO: false,
     currentClick: 0,
-    maxClick: 6
+    maxClick: 8
+  }
+
+  function isWinner(state){
+    var firstColumn = true;
+    results = []
+    var results = [
+      [
+        state.board[0][0] && state.board[0][1] && state.board[0][2]
+        ||
+        !state.board[0][0] && !state.board[0][1] && !state.board[0][2],
+
+        state.board[0][0] && state.board[0][1] && state.board[0][2]
+        ||
+        !state.board[0][0] && !state.board[0][1] && !state.board[0][2],
+
+        state.board[0][0] && state.board[0][1] && state.board[0][2]
+        ||
+        !state.board[0][0] && !state.board[0][1] && !state.board[0][2]
+      ],
+      [
+        state.board[1][0] && state.board[1][1] && state.board[1][2]
+        ||
+        !state.board[1][0] && !state.board[1][1] && !state.board[1][2],
+
+        state.board[1][0] && state.board[1][1] && state.board[1][2]
+        ||
+        !state.board[1][0] && !state.board[1][1] && !state.board[1][2],
+
+        state.board[1][0] && state.board[1][1] && state.board[1][2]
+        ||
+        !state.board[1][0] && !state.board[1][1] && !state.board[1][2]
+      ],
+      [
+        state.board[2][0] && state.board[2][1] && state.board[2][2]
+        ||
+        !state.board[2][0] && !state.board[2][1] && !state.board[2][2],
+
+        state.board[2][0] && state.board[2][1] && state.board[2][2]
+        ||
+        !state.board[2][0] && !state.board[2][1] && !state.board[2][2],
+
+        state.board[2][0] && state.board[2][1] && state.board[2][2]
+        ||
+        !state.board[2][0] && !state.board[2][1] && !state.board[2][2]
+      ],
+    ]
   }
 
   var x ='<i class="fa fa-times" aria-hidden="true"></i>';
   var o ='<i class="fa fa-circle-o" aria-hidden="true"></i>';
 
-  // var WINNERS = {
-  //   rowTop: '.row1',
-  //   rowMiddle: '.row2',
-  //   rowBottom: '.row3',
-  //   col1: '.row .square(0)',
-  //   col2: ,
-  //   col3: ,
-  //   diagNeg: ,
-  //   diagPos:
-  // }
-
-
   function squareClick(state) {
     $('.game-container .square').click(function(){
-      if ($(this).hasClass('js-open-square')) {
-        updateState(state);
-        renderClick(state);
-        $(this).removeClass('js-open-square');
-        console.log(state)
-      }
+      if (!$(this).hasClass('js-open-square')) return;
+
+      updateState(state);
+      renderClick(state);
+      $(this).removeClass('js-open-square');
+      console.log(state);
     });
   }
 
   function renderClick(state) {
-    if (state.turnX === true) {
+    if (state.turnO === true) {
       $(event.target).html(x).addClass('x-filled');
     }
     else {
@@ -45,14 +84,16 @@ $(function() {
   function updateState(state) {
     if (state.currentClick < state.maxClick) {
       state.currentClick++;
-      if (state.turnX === true) {
-        state.turnX = false;
-      }
-      else {
-        state.turnX = true;
-      }
+      state.turnO = !state.turnO;
+
+      // if (state.turnO === true) {
+      //   state.turnO = false;
+      // }
+      // else {
+      //   state.turnO = true;
+      // }
     }
-    else if (state.currentClick === state.maxClick){
+    if (state.currentClick === state.maxClick){
       alert("you're out of moves!")
     }
   }
