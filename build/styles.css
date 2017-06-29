@@ -32,5 +32,9 @@ h1 {
       width: 200px;
       height: 200px;
       border-left: 10px solid #292929; }
+      .game-container .row .square.winner {
+        background: rgba(0, 255, 225, 0.35); }
       .game-container .row .square:first-of-type {
         border: 0; }
+    .game-container .row.winner .square {
+      background: rgba(0, 255, 225, 0.35); }

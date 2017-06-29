@@ -88,12 +88,14 @@ $(function() {
     state.board[rowIndex][squareIndex] = state.turnO;
     console.log(state)
 
-    if ( state.board[rowIndex][0] && state.board[rowIndex][1] && state.board[rowIndex][2] === true ) {
-      console.log("0 wins!")
-    }
-    // else if ( state.board[rowIndex][0] && state.board[rowIndex][1] && state.board[rowIndex][2] == false ) {
-    //   console.log("x wins!")
+    // if ( state.board[rowIndex][0] && state.board[rowIndex][1] && state.board[rowIndex][2] ) {
+    //   console.log("0 wins!")
+    //   $(event.target).parent().addClass("winner")
     // }
+  // if ( state.board[rowIndex][0] && state.board[rowIndex][1] && state.board[rowIndex][2]) {
+  //     console.log(!state.board[rowIndex][0])
+  //     $(event.target).parent().addClass("winner")
+  //   }
   }
 
   function boardCheck(state) {
@@ -105,13 +107,22 @@ $(function() {
   function isWinner(state) {
     var rowIndex = $(event.target).parent().index();
     var squareIndex = $(event.target).index();
+    var boardLength = state.board.length;
 
-    // if ( state.board[rowIndex][0] && state.board[rowIndex][1] && state.board[rowIndex][2] == true ) {
-    //   console.log("0 wins!")
-    // }
-    // else if ( state.board[rowIndex][0] && state.board[rowIndex][1] && state.board[rowIndex][2] != true ) {
+    if ( state.board[rowIndex][0] && state.board[rowIndex][1] && state.board[rowIndex][2]) {
+      console.log("0 wins!")
+      $(event.target).parent().addClass("winner")
+    }
+    // else if ( !state.board[rowIndex][0] && !state.board[rowIndex][1] && !state.board[rowIndex][2]) {
     //   console.log("x wins!")
+    //   $(event.target).parent().addClass("winner")
     // }
+    else if ( state.board[0][squareIndex] && state.board[1][squareIndex] && state.board[2][squareIndex] ) {
+      console.log("0 wins!", squareIndex)
+      for(var i=0; i < boardLength; i++){
+        $('.row').eq(i).find('.square').eq(squareIndex).addClass("winner");
+      };
+    }
   }
 
   $('.game-container .square').click(function(){

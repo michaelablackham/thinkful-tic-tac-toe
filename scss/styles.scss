@@ -41,8 +41,18 @@ h1 {
       height: 200px;
       border-left: 10px solid #292929;
 
+      &.winner {
+        background: rgba(0,255,225,.35);
+      }
+
       &:first-of-type {
         border: 0;
+      }
+    }
+
+    &.winner {
+      .square {
+        background: rgba(0,255,225,.35);
       }
     }
   }
