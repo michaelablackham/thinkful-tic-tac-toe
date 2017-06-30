@@ -20,12 +20,9 @@ h1 {
 //GAME CONTAINER
 .game-container {
   display: block;
-  width: 600px;
+  width: 90%;
+  max-width: 600px;
   margin:  0 auto 60px;
-
-  @media (max-width: 600px) {
-    width: 90%;
-  }
 
   .row {
     display: flex;

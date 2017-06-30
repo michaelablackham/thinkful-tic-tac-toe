@@ -35,7 +35,7 @@ $(function() {
       (stateRow[0] === false && stateRow[1] === false && stateRow[2] === false)
     ) {
       $(event.target).parent().addClass("winner");
-      state.gameOver = true;
+      state.gameOver = !state.gameOver;
       gameOver(state);
     }
     else { null }
@@ -49,7 +49,7 @@ $(function() {
       for(var i=0; i < boardLength; i++){
         $('.row').eq(i).find('.square').eq(squareIndex).addClass("winner");
       };
-      state.gameOver = true;
+      state.gameOver = !state.gameOver;
       gameOver(state);
     }
     else { null }
@@ -63,17 +63,19 @@ $(function() {
       for(var i=0; i < boardLength; i++){
         $('.row').eq(i).find('.square').eq(i).addClass("winner");
       };
-      state.gameOver = true;
+      state.gameOver = !state.gameOver;
       gameOver(state);
     }
     else if (
       (state.board[0][2] && state.board[1][1] && state.board[2][0]) ||
       (state.board[0][2] === false && state.board[1][1] === false && state.board[2][0] === false)
     ) {
+      var s=2;
       for(var r=0; r < boardLength; r++){
         $('.row').eq(r).find('.square').eq(s).addClass("winner");
+        s=s-1;
       };
-      state.gameOver = true;
+      state.gameOver = !state.gameOver;
       gameOver(state);
     }
     else { null }
@@ -105,8 +107,8 @@ $(function() {
     ],
     state.turnO= false;
     state.currentClick= 0;
-    state.gameOver= false;
-    $('.square').removeClass('winner').addClass('js-open-square').html("");
+    state.gameOver = !state.gameOver;
+    $('.game-container .square').removeClass('winner').addClass('js-open-square').html("");
   });
 
   $('.game-container .square').click(function(){
