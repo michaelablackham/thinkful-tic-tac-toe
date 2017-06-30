@@ -1,6 +1,7 @@
 $(function() {
   'use strict';
 
+//STATE MANAGEMENT
   var state = {
     board: [
       [null,null,null],
@@ -16,8 +17,6 @@ $(function() {
   var x ='<i class="fa fa-times" aria-hidden="true"></i>';
   var o ='<i class="fa fa-circle-o" aria-hidden="true"></i>';
 
-
-  //STATE MANAGEMENT
   //update the STATE variable on click
   function updateState(state, rowIndex, squareIndex) {
     if (state.currentClick < state.maxClick) {
@@ -27,7 +26,13 @@ $(function() {
     state.board[rowIndex][squareIndex] = state.turnO;
   }
 
+  function winner(state) {
+    state.gameOver = !state.gameOver;
+    gameOver(state);
+  }
+
 //RENDER
+  // Check for row winners
   function rowWinner(state, rowIndex, squareIndex, boardLength) {
     var stateRow = state.board[rowIndex];
     if (
@@ -35,12 +40,12 @@ $(function() {
       (stateRow[0] === false && stateRow[1] === false && stateRow[2] === false)
     ) {
       $(event.target).parent().addClass("winner");
-      state.gameOver = !state.gameOver;
-      gameOver(state);
+      winner(state);
     }
     else { null }
   }
 
+  // Check for column winners
   function columnWinner(state, rowIndex, squareIndex, boardLength) {
     if (
       (state.board[0][squareIndex] && state.board[1][squareIndex] && state.board[2][squareIndex]) ||
@@ -49,12 +54,12 @@ $(function() {
       for(var i=0; i < boardLength; i++){
         $('.row').eq(i).find('.square').eq(squareIndex).addClass("winner");
       };
-      state.gameOver = !state.gameOver;
-      gameOver(state);
+      winner(state);
     }
     else { null }
   }
 
+  // Check for diagonal winners
   function diagonalWinner(state, rowIndex, squareIndex, boardLength) {
     if (
       (state.board[0][0] && state.board[1][1] && state.board[2][2]) ||
@@ -63,8 +68,7 @@ $(function() {
       for(var i=0; i < boardLength; i++){
         $('.row').eq(i).find('.square').eq(i).addClass("winner");
       };
-      state.gameOver = !state.gameOver;
-      gameOver(state);
+      winner(state);
     }
     else if (
       (state.board[0][2] && state.board[1][1] && state.board[2][0]) ||
@@ -75,14 +79,12 @@ $(function() {
         $('.row').eq(r).find('.square').eq(s).addClass("winner");
         s=s-1;
       };
-      state.gameOver = !state.gameOver;
-      gameOver(state);
+      winner(state);
     }
     else { null }
-
   }
 
-  function isWinner(state, rowIndex, squareIndex, boardLength) {
+  function winnerCheck(state, rowIndex, squareIndex, boardLength) {
     rowWinner(state, rowIndex, squareIndex, boardLength);
     columnWinner(state, rowIndex, squareIndex, boardLength);
     diagonalWinner(state, rowIndex, squareIndex, boardLength);
@@ -119,7 +121,7 @@ $(function() {
     // updateBoard(state, rowIndex, squareIndex);
     updateState(state, rowIndex, squareIndex);
     renderClick(state);
-    isWinner(state, rowIndex, squareIndex, boardLength);
+    winnerCheck(state, rowIndex, squareIndex, boardLength);
     $(this).removeClass('js-open-square');
   });
 
