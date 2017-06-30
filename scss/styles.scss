@@ -45,6 +45,10 @@ h1 {
         background: rgba(0,255,225,.35);
       }
 
+      &.js-open-square {
+        cursor: pointer;
+      }
+
       &:first-of-type {
         border: 0;
       }

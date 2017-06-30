@@ -83,35 +83,74 @@ $(function() {
     // }
   }
 
-  function isWinner(state, rowIndex, squareIndex, boardLength) {
-    console.log(
-      state.board[rowIndex][0] + ',' + state.board[rowIndex][1] + ',' + state.board[rowIndex][2]
-    )
+  // function hasWinnerOnRow(state, row) {
+  //   return hasWinner(state.board[row])
+  // }
 
-    if ( state.board[rowIndex][0] && state.board[rowIndex][1] && state.board[rowIndex][2]) {
+  function rowWinner(state, rowIndex, squareIndex, boardLength) {
+    var stateRow = state.board[rowIndex];
+    if (
+      (stateRow[0] && stateRow[1] && stateRow[2]) ||
+      (stateRow[0] === false && stateRow[1] === false && stateRow[2] === false)
+    ) {
       $(event.target).parent().addClass("winner");
       state.gameOver = true;
       gameOver(state);
     }
-    // else if ( state.board[rowIndex][0] && state.board[rowIndex][1] && state.board[rowIndex][2] == false) {
-    //   $(event.target).parent().addClass("winner");
-    //   state.gameOver = true;
-    //   gameOver(state);
-    // }
-    else if ( state.board[0][squareIndex] && state.board[1][squareIndex] && state.board[2][squareIndex] ) {
+    else { null }
+  }
+
+  function columnWinner(state, rowIndex, squareIndex, boardLength) {
+    if (
+      (state.board[0][squareIndex] && state.board[1][squareIndex] && state.board[2][squareIndex]) ||
+      (state.board[0][squareIndex] === false && state.board[1][squareIndex] === false && state.board[2][squareIndex] === false)
+    ) {
       for(var i=0; i < boardLength; i++){
         $('.row').eq(i).find('.square').eq(squareIndex).addClass("winner");
       };
+      state.gameOver = true;
+      gameOver(state);
     }
-    else if ( state.board[rowIndex][squareIndex] && state.board[(rowIndex+1)][(squareIndex+1)] && state.board[(rowIndex-1)][(squareIndex-1)] && (state.board[(rowIndex+2)][(squareIndex+2)] || state.board[(rowIndex-2)][(squareIndex-2)]) ) {
-      console.log("diagonal")
+    else { null }
+  }
+
+  function diagonalWinner(state, rowIndex, squareIndex, boardLength) {
+    if (
+      (state.board[0][0] && state.board[1][1] && state.board[2][2]) ||
+      (state.board[0][0] === false && state.board[1][1] === false && state.board[2][2] === false) ||
+      (state.board[0][2] && state.board[1][1] && state.board[2][0]) ||
+      (state.board[0][2] === false && state.board[1][1] === false && state.board[2][0] === false)
+    ) {
+      console.log("diagonal");
+      state.gameOver = true;
+      gameOver(state);
     }
+    else { null }
+
+  }
+
+
+
+  function hasWinner(values) {
+    return (
+      (values[0] && values[1] && values[2])
+      ||
+      (values[0] === false && values[1] === false && values[2] === false)
+    )
+      ? values[0]
+      : null
+  }
+
+  function isWinner(state, rowIndex, squareIndex, boardLength) {
+    rowWinner(state, rowIndex, squareIndex, boardLength);
+    columnWinner(state, rowIndex, squareIndex, boardLength);
+    diagonalWinner(state, rowIndex, squareIndex, boardLength);
 
   }
 
   function gameOver(state) {
     if (state.gameOver) {
-      console.log("game over")
+      $('.square').removeClass('js-open-square');
     }
   }
 
@@ -121,16 +160,16 @@ $(function() {
   }
 
   //EVENT LISTENERS
-  $('.game-container .square').click(function(){
-    if (!$(this).hasClass('js-open-square')) return;
-    var rowIndex = $(event.target).parent().index();
-    var squareIndex = $(event.target).index();
-    var boardLength = state.board.length;
-    updateBoard(state, rowIndex, squareIndex);
-    updateState(state);
-    renderClick(state);
-    isWinner(state, rowIndex, squareIndex, boardLength);
-    $(this).removeClass('js-open-square');
-  });
+    $('.game-container .square').click(function(){
+      if (!$(this).hasClass('js-open-square')) return;
+      var rowIndex = $(event.target).parent().index();
+      var squareIndex = $(event.target).index();
+      var boardLength = state.board.length;
+      updateBoard(state, rowIndex, squareIndex);
+      updateState(state);
+      renderClick(state);
+      isWinner(state, rowIndex, squareIndex, boardLength);
+      $(this).removeClass('js-open-square');
+    });
 
 });
