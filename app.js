@@ -28,7 +28,7 @@ $(function() {
 
   function winner(state) {
     state.gameOver = !state.gameOver;
-    gameOver(state);
+    gameOver(state)
   }
 
 //RENDER
@@ -109,8 +109,9 @@ $(function() {
     ],
     state.turnO= false;
     state.currentClick= 0;
-    state.gameOver = !state.gameOver;
-    $('.game-container .square').removeClass('winner').addClass('js-open-square').html("");
+    state.gameOver = false;
+    $('.square').removeClass('winner').addClass('js-open-square').html("");
+    console.log(state)
   });
 
   $('.game-container .square').click(function(){
