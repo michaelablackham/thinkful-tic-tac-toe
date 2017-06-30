@@ -111,6 +111,7 @@ $(function() {
     state.currentClick= 0;
     state.gameOver = false;
     $('.square').removeClass('winner').addClass('js-open-square').html("");
+    $('.row').removeClass('winner');
     console.log(state)
   });
 
