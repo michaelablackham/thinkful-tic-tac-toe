@@ -1,6 +1,7 @@
 * {
   color: #fff;
   font-family: 'Lato', sans-serif;
+  text-align: center;
 }
 body {
   background: #101010;
@@ -10,7 +11,7 @@ body {
 h1 {
   text-align: center;
   text-transform: uppercase;
-  margin-bottom: 100px;
+  margin: 0 auto 60px;
   letter-spacing: 5px;
   font-size: 3em;
 }
@@ -20,7 +21,11 @@ h1 {
 .game-container {
   display: block;
   width: 600px;
-  margin: auto;
+  margin:  0 auto 60px;
+
+  @media (max-width: 600px) {
+    width: 90%;
+  }
 
   .row {
     display: flex;
@@ -37,9 +42,19 @@ h1 {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 200px;
+      width: 33.3%;
       height: 200px;
       border-left: 10px solid #292929;
+
+      @media (max-width: 600px) {
+        height: 150px;
+        font-size: 5em;
+      }
+
+      @media (max-width: 450px) {
+        height: 100px;
+        font-size: 4em;
+      }
 
       &.winner {
         background: rgba(0,255,225,.35);
@@ -59,5 +74,20 @@ h1 {
         background: rgba(0,255,225,.35);
       }
     }
+  }
+}
+
+button {
+  border: 0;
+  border-radius: 30px;
+  cursor: pointer;
+  padding: 15px 30px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  background-color: rgba(250,250,250,.2);
+  text-align: center;
+
+  &:hover {
+    background-color: rgba(250,250,250,.25);
   }
 }
